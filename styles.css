@@ -1,0 +1,185 @@
+/* ======= Base Styles ======= */
+body {
+  font-family: "Noto Sans Thai", "Sarabun", sans-serif;
+  margin: 0;
+  background: #f8f9fb;
+  color: #222;
+}
+
+/* ======= Header ======= */
+header {
+  text-align: center;
+  padding: 40px 16px 24px;
+  background: linear-gradient(135deg, #316BFF, #4BA3FF);
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+header h1 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+header p {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+/* ======= Company Cards ======= */
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  padding: 40px 24px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+article {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+article:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+article img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+article h2 {
+  margin: 10px 0 6px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+article p {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* ======= Buttons ======= */
+button,
+.open-btn,
+.overlay-box a {
+  font-family: inherit;
+  border: none;
+  background: #316BFF;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+button:hover,
+.open-btn:hover,
+.overlay-box a:hover {
+  background: #2457e6;
+  transform: translateY(-1px);
+}
+
+/* ======= Overlay ======= */
+#overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.overlay-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 28px;
+  text-align: center;
+  width: 90%;
+  max-width: 380px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.25s ease;
+}
+
+.overlay-box img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.overlay-box h2 {
+  margin: 10px 0 8px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.overlay-box p {
+  margin: 0 0 16px;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.overlay-box a {
+  margin: 6px;
+}
+
+#closeBtn {
+  background: #e0e0e0;
+  color: #333;
+}
+
+#closeBtn:hover {
+  background: #cfcfcf;
+}
+
+/* ======= Footer ======= */
+footer {
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+  padding: 24px 0 40px;
+}
+
+/* ======= Animations ======= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ======= Mobile ======= */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 22px;
+  }
+  header p {
+    font-size: 13px;
+  }
+  article h2 {
+    font-size: 18px;
+  }
+}
+
