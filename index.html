@@ -1,35 +1,49 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>แนะนำหุ้น Tech</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD Tester</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>กระดานแนะนำหุ้นเทคโนโลยีชั้นนำ</h1>
-    <p>คลิ๊กเพื่อดูรายละเอียดเพิ่มเติม</p>
-  </header>
+    <div class="container">
+        <h1>CRUD API Tester</h1>
 
-  <main id="companyList"></main>
+        <div class="card">
+            <h2>GET /api/users</h2>
+            <button onclick="getUsers()">Fetch Users</button>
+            <pre id="getResult"></pre>
+        </div>
 
-  <div id="overlay" style="display: none;">
-    <article class="overlay-box">
-      <img id="overlayLogo" src="" alt="">
-      <h2 id="overlayTitle"></h2>
-      <p id="overlayDesc"></p>
-      <a id="overlayLink" href="#" target="_blank">ดูกราฟ</a>
-      <button id="closeBtn">ปิด</button>
-    </article>
-  </div>
+        <div class="card">
+            <h2>POST /api/users</h2>
+            <input id="postName" placeholder="Name" />
+            <input id="postEmail" placeholder="Email" />
+            <input id="postRole" placeholder="Role" />
+            <input id="postId" placeholder="Custom ID (optional)" />
+            <button onclick="createUser()">Create User</button>
+            <pre id="postResult"></pre>
+        </div>
 
-  <footer>
-    © พัฒนาโดย APB Enterprise
-  </footer>
-  <script src="script.js"></script>
+        <div class="card">
+            <h2>PUT /api/users/:id</h2>
+            <input id="putId" placeholder="User ID" />
+            <input id="putName" placeholder="New Name" />
+            <input id="putEmail" placeholder="New Email" />
+            <input id="putRole" placeholder="New Role" />
+            <button onclick="updateUser()">Update User</button>
+            <pre id="putResult"></pre>
+        </div>
+
+        <div class="card">
+            <h2>DELETE /api/users/:id</h2>
+            <input id="deleteId" placeholder="User ID" />
+            <button onclick="deleteUser()">Delete User</button>
+            <pre id="deleteResult"></pre>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
