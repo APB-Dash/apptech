@@ -1,83 +1,55 @@
-const companyList = document.getElementById("companyList");
-const overlay = document.getElementById("overlay");
-const closeButton = document.getElementById("closeBtn");
-const overlayLogo = document.getElementById("overlayLogo");
-const overlayTitle = document.getElementById("overlayTitle");
-const overlayDesc = document.getElementById("overlayDesc");
-const overlayLink = document.getElementById("overlayLink");
+const BASE = "https://app-9xd9z654j-asaphongs-projects.vercel.app";
 
-function openOverlay() {
-  overlay.style.display = "flex";
-  document.body.classList.add("modal-open");
+async function getUsers() {
+    const res = await fetch(`${BASE}/api/users`);
+    const data = await res.json();
+    document.getElementById("getResult").textContent = JSON.stringify(data, null, 2);
 }
 
-function closeOverlay() {
-  overlay.style.display = "none";
-  document.body.classList.remove("modal-open");
+async function createUser() {
+    const payload = {
+        name: document.getElementById("postName").value,
+        email: document.getElementById("postEmail").value,
+        role: document.getElementById("postRole").value
+    };
+    const customId = document.getElementById("postId").value;
+    if (customId) payload.id = customId;
+
+    const res = await fetch(`${BASE}/api/users`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    document.getElementById("postResult").textContent = JSON.stringify(data, null, 2);
 }
 
-function handleOverlayClick(event) {
-  const clickedElement = event.target;
-  const isInsideBox = clickedElement.closest(".overlay-box");
-  if (isInsideBox === null) {
-    closeOverlay();
-  }
+async function updateUser() {
+    const id = document.getElementById("putId").value;
+    const payload = {};
+
+    if (document.getElementById("putName").value) payload.name = document.getElementById("putName").value;
+    if (document.getElementById("putEmail").value) payload.email = document.getElementById("putEmail").value;
+    if (document.getElementById("putRole").value) payload.role = document.getElementById("putRole").value;
+
+    const res = await fetch(`${BASE}/api/users/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    document.getElementById("putResult").textContent = JSON.stringify(data, null, 2);
 }
 
-function createCompanyCard(company) {
-  const article = document.createElement("article");
-  article.setAttribute("data-name", company.name);
-  article.setAttribute("data-desc", company.desc);
-  article.setAttribute("data-img", company.img);
-  article.setAttribute("data-url", company.url);
+async function deleteUser() {
+    const id = document.getElementById("deleteId").value;
 
-  const logo = document.createElement("img");
-  logo.src = company.img;
-  logo.alt = company.name;
-  logo.width = 120;
-  logo.height = 120;
+    const res = await fetch(`${BASE}/api/users/${id}`, {
+        method: "DELETE"
+    });
 
-  const title = document.createElement("h2");
-  title.textContent = company.name;
-
-  const desc = document.createElement("p");
-  desc.textContent = company.desc;
-
-  const button = document.createElement("button");
-  button.type = "button";
-  button.className = "open-btn";
-  button.textContent = "รายละเอียด";
-
-  button.addEventListener("click", function () {
-    overlayTitle.textContent = company.name;
-    overlayDesc.textContent = company.desc;
-    overlayLogo.src = company.img;
-    overlayLogo.alt = company.name;
-    overlayLink.href = company.url;
-    openOverlay();
-  });
-
-  article.appendChild(logo);
-  article.appendChild(title);
-  article.appendChild(desc);
-  article.appendChild(button);
-
-  return article;
+    const data = await res.json();
+    document.getElementById("deleteResult").textContent = JSON.stringify(data, null, 2);
 }
-
-function loadCompanies() {
-  fetch("companies.json")
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((company) => {
-        const card = createCompanyCard(company);
-        companyList.appendChild(card);
-      });
-    })
-    .catch((error) => console.error("Error loading companies:", error));
-}
-
-closeButton.addEventListener("click", closeOverlay);
-overlay.addEventListener("click", handleOverlayClick);
-
-loadCompanies();
